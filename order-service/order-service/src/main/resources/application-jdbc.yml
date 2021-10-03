@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    schema: classpath:sql/schema.sql
+    url: "jdbc:postgresql://postgres@192.168.99.100:5432/ZWRhLWRlbW8tZGI="
+    driverClassName: org.postgresql.Driver
+    username: ZWRhLWRlbW8tbG9naW4=
+    password: ZWRhLWRlbW8tcGFzc3dvcmQ=
+    initialization-mode: always
+  r2dbc:
+    url: "r2dbc:postgresql://postgres@192.168.99.100:5432/ZWRhLWRlbW8tZGI="
+    username: ZWRhLWRlbW8tbG9naW4=
+    password: ZWRhLWRlbW8tcGFzc3dvcmQ=

@@ -1,0 +1,6 @@
+kafka:
+  consumer:
+    topic: order-topic
+    server: 192.168.99.100:9092
+#     clientId:
+# TODO refactoring
