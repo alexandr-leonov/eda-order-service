@@ -4,3 +4,23 @@ server:
 spring:
   profiles:
     include: kafka, jdbc
+
+management:
+  security:
+    enabled: true
+  health:
+    default:
+      enabled: true
+    db:
+      enabled: true
+  endpoints:
+    health:
+      sensitive: false
+      showDetails: always
+    web:
+      exposure:
+        include: health, info, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true

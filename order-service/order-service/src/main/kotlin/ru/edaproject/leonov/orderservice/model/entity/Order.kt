@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Table
 import ru.edaproject.leonov.orderservice.model.list.OrderState
 import java.math.BigDecimal
 
-@Table("ORDER")
+@Table("ORDERS")
 data class Order(@Id
                  var orderId: String? = null,
                  val userId: Long,
