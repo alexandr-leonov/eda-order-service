@@ -6,20 +6,18 @@ spring:
     include: kafka, jdbc
 
 management:
-  security:
-    enabled: true
   health:
     default:
       enabled: true
     db:
       enabled: true
-  endpoints:
+  endpoint:
     health:
-      sensitive: false
       showDetails: always
+  endpoints:
     web:
       exposure:
-        include: health, info, prometheus
+        include: health, prometheus
   metrics:
     export:
       prometheus:
