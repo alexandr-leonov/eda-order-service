@@ -9,4 +9,14 @@ data class OrderResponse(val orderId: String,
                          val name: String,
                          val amount: BigDecimal,
                          var description: String? = "",
-                         val state: OrderState)
+                         val state: OrderState) {
+    override fun toString(): String {
+        return "OrderResponse(orderId='$orderId', " +
+                "userId=$userId, " +
+                "storeId='$storeId', " +
+                "name='$name', " +
+                "amount=$amount, " +
+                "description=$description, " +
+                "state=$state)"
+    }
+}

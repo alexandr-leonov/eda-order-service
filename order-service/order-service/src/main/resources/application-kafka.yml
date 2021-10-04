@@ -1,11 +1,32 @@
-kafka:
-  bootstrap:
-    servers: 192.168.99.100:9092
-  producer:
-    clientId: order-service-producer
-  consumer:
-    groupId: order-service-consumer
-  streams:
-    applicationId: order-service
-    sourceTopic: order-topic
-    sinkTopic: order-sink-topic
+spring:
+  kafka:
+    bootstrap-servers: 192.168.99.100:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    consumer:
+      group-id: order-service-consumer
+      auto-offset-reset: earliest
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            use:
+              type:
+                headers: false
+            value:
+              default:
+                type: ru.edaproject.leonov.orderservice.model.dto.OrderCreateRequest
+    properties:
+      spring:
+        json:
+          trusted:
+            packages: "*"
+
+topics:
+  order:
+    topic: order-topic
+    createTopic: order-create-topic
+  store:
+    topic: store-topic

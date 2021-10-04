@@ -24,7 +24,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
 	implementation("io.r2dbc:r2dbc-postgresql")
-	implementation("org.apache.kafka:kafka-streams")
+	implementation("io.projectreactor.kafka:reactor-kafka")
+	implementation("org.springframework.kafka:spring-kafka")
+
 	implementation("io.micrometer:micrometer-registry-prometheus")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
