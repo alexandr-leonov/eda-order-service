@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="order-service.order-service.main" target="11" />
-      <module name="order-service.order-service.test" target="11" />
-    </bytecodeTargetLevel>
-  </component>
-</project>
