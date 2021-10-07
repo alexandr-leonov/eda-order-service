@@ -23,7 +23,6 @@ EXPOSE 8083
 EXPOSE 30301
 EXPOSE 9092
 
-RUN ls && cd build/libs && ls
 COPY --from=packager "$JAVA_HOME" "$JAVA_HOME"
 COPY ./build/libs/order-service-1.0.0.jar order-service-1.0.0.jar
 
