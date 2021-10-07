@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:$(date +%s)
+    - name: Publish to Docker HUB
+      uses: action/docker-build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_LOGIN }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        repository: ${{ secrets.DOCKER_HUB_LOGIN }}/order-service
+        tags: ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:$(date +%s)
+    
+  
