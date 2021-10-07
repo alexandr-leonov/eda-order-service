@@ -19,7 +19,7 @@ jobs:
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Build with Gradle
-      run: gradlew build
+      run: order-service/order-service/gradlew build
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: cd order-service/order-service && docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
