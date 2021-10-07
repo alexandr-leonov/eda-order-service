@@ -24,7 +24,7 @@ jobs:
       run: cd order-service/order-service && ./gradlew bootJar && cd build/libs && ls 
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: cd order-service/order-service && docker build --file Dockerfile --tag ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
+      run: cd order-service/order-service && docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
     - name: Login it Docker Hub
       run: docker login -u ${{ secrets.DOCKER_HUB_LOGIN }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Publish to Docker HUB
