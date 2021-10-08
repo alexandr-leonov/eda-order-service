@@ -27,4 +27,4 @@ COPY --from=packager "$JAVA_HOME" "$JAVA_HOME"
 WORKDIR /order-service
 COPY ./build/libs/. .
 
-ENTRYPOINT ["java","-jar","/order-service-1.0.0.jar"]
+ENTRYPOINT ["java","-jar","order-service-1.0.0.jar"]
