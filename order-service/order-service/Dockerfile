@@ -25,6 +25,8 @@ EXPOSE 9092
 
 COPY --from=packager "$JAVA_HOME" "$JAVA_HOME"
 WORKDIR /order-service
+COPY . .
+RUN ls
 COPY order-service-1.0.0.jar order-service-1.0.0.jar
 
 ENTRYPOINT ["java","-jar","/order-service-1.0.0.jar"]
