@@ -23,8 +23,6 @@ jobs:
     - name: Build image
       run: cd order-service/order-service &&
            ./gradlew bootJar &&
-           cp -a build/libs/ . &&
-           ls -aux &&
            docker build  -t ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest -f- ./ < Dockerfile &&
            docker login -u ${{ secrets.DOCKER_HUB_LOGIN }} -p ${{ secrets.DOCKER_HUB_PASSWORD }} &&
            docker push ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
