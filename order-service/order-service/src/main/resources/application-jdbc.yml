@@ -1,9 +1,9 @@
 spring:
   r2dbc:
     # TODO Move credentials to k8s secrets
-    url: r2dbc:postgresql://192.168.99.100:30301/eda-demo-db
-    username: eda-demo-login
-    password: eda-demo-password
+    url: r2dbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_SCHEMA}
+    username: ${DATABASE_LOGIN}
+    password: ${DATABASE_PASSWORD}
     initialization-mode: always
     pool:
       name: ORDER-SERVICE-POOL
