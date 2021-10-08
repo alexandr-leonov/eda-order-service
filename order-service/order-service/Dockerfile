@@ -24,6 +24,7 @@ EXPOSE 30301
 EXPOSE 9092
 
 COPY --from=packager "$JAVA_HOME" "$JAVA_HOME"
-COPY /home/runner/work/eda-order-service/eda-order-service/order-service/order-service/build/libs/order-service-1.0.0.jar order-service-1.0.0.jar
+WORKDIR /order-service
+COPY ./build/libs/. .
 
-ENTRYPOINT ["java","-jar","/order-service-1.0.0.jar"]
+ENTRYPOINT ["java","-jar","order-service-1.0.0.jar"]
