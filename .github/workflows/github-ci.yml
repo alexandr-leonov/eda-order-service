@@ -20,14 +20,13 @@ jobs:
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Make gradlew executable
       run: cd order-service/order-service && chmod +x ./gradlew
-    - name: Build with Gradle
-      run: cd order-service/order-service && ./gradlew bootJar && mv build/libs/order-service-1.0.0.jar ../../order-service-1.0.0.jar && pwd && ls
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: cd order-service/order-service && docker build  -t ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest -f- ./ < Dockerfile
-    - name: Login it Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_HUB_LOGIN }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: Publish to Docker HUB
-      run: docker push ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
+    - name: Build image
+      run: cd order-service/order-service && \
+           ./gradlew bootJar && \
+           cp -a build/libs/ . && \
+           ls -aux && \
+           docker build  -t ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest -f- ./ < Dockerfile && \
+           docker login -u ${{ secrets.DOCKER_HUB_LOGIN }} -p ${{ secrets.DOCKER_HUB_PASSWORD }} && \
+           docker push ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
     
   
