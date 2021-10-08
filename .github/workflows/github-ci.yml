@@ -21,7 +21,7 @@ jobs:
     - name: Make gradlew executable
       run: cd order-service/order-service && chmod +x ./gradlew
     - name: Build with Gradle
-      run: cd order-service/order-service && ./gradlew bootJar && cd build/libs && ls 
+      run: cd order-service/order-service && ./gradlew bootJar && cd build/libs && cp order-service-1.0.0.jar ../../order-service-1.0.0.jar
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: cd order-service/order-service && docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_LOGIN }}/order-service:latest
