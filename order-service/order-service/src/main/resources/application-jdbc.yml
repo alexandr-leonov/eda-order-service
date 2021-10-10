@@ -1,6 +1,5 @@
 spring:
   r2dbc:
-    # TODO Move credentials to k8s secrets
     url: r2dbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_SCHEMA}
     username: ${DATABASE_LOGIN}
     password: ${DATABASE_PASSWORD}
