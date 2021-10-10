@@ -34,6 +34,7 @@ class OrderHandler(val orderConsumer: ReactiveKafkaConsumerTemplate<String, Orde
                     val request: OrderCreateRequest = it
                     return@flatMap orderService.createOrder(request).asFlux()
                 }
+                // TODO move from queue to REST endpoints
                 .flatMap {
                     val order: OrderResponse = it
                     return@flatMap orderProducer.send(orderTopic, order)
