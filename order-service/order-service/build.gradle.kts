@@ -18,23 +18,30 @@ repositories {
 }
 
 dependencies {
+	// Metrics
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	// Webflux
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	// PostgreSQL
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
-
 	implementation("io.r2dbc:r2dbc-postgresql")
+	// Kafka
 	implementation("io.projectreactor.kafka:reactor-kafka")
 	implementation("org.springframework.kafka:spring-kafka")
-
-	implementation("io.micrometer:micrometer-registry-prometheus")
-
+	// Logging
+	implementation("org.slf4j:slf4j-api:1.7.32")
+    // Kotlin support
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-
+	// openapi
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.5.10")
+	implementation("org.springdoc:springdoc-openapi-webflux-ui:1.5.10")
+	// tests
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 }

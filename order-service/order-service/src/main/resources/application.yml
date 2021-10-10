@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    include: kafka, jdbc
+    include: kafka, jdbc, swagger
 
 management:
   health:
@@ -17,7 +17,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, prometheus
+        include: health, prometheus, info, openapi, swaggerui
   metrics:
     export:
       prometheus:

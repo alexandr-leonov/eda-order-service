@@ -1,4 +1,4 @@
-package ru.edaproject.leonov.orderservice.handler
+package ru.edaproject.leonov.orderservice.listener
 
 import kotlinx.coroutines.reactor.asFlux
 import org.springframework.beans.factory.annotation.Value
@@ -10,13 +10,14 @@ import reactor.core.publisher.Flux
 import reactor.kafka.sender.SenderResult
 import ru.edaproject.leonov.orderservice.model.dto.OrderCreateRequest
 import ru.edaproject.leonov.orderservice.model.dto.OrderResponse
+import ru.edaproject.leonov.orderservice.model.extension.logger
 import ru.edaproject.leonov.orderservice.service.OrderService
 
-// TODO move all print() to slf4j with logback config
 @Component
-class OrderHandler(val orderConsumer: ReactiveKafkaConsumerTemplate<String, OrderCreateRequest>,
-                   val orderProducer: ReactiveKafkaProducerTemplate<String, OrderResponse>,
-                   val orderService: OrderService) : CommandLineRunner {
+class OrderListener(val orderConsumer: ReactiveKafkaConsumerTemplate<String, OrderCreateRequest>,
+                    val orderService: OrderService) : CommandLineRunner {
+
+    private val log = logger()
 
     @Value("\${topics.order.topic}")
     private lateinit var orderTopic: String
@@ -25,20 +26,15 @@ class OrderHandler(val orderConsumer: ReactiveKafkaConsumerTemplate<String, Orde
         createOrderProcess().subscribe()
     }
 
-    private fun createOrderProcess() : Flux<SenderResult<Void>> =
+    private fun createOrderProcess() : Flux<OrderResponse> =
         orderConsumer
                 .receiveAutoAck()
-                .doOnNext { print("topic=${it.topic()} key=${it.key()} value=${it.value()} offset=${it.offset()}") }
+                .doOnNext { log.info("topic=${it.topic()} key=${it.key()} value=${it.value()} offset=${it.offset()}") }
                 .map { it.value() }
                 .flatMap {
                     val request: OrderCreateRequest = it
                     return@flatMap orderService.createOrder(request).asFlux()
                 }
-                // TODO move from queue to REST endpoints
-                .flatMap {
-                    val order: OrderResponse = it
-                    return@flatMap orderProducer.send(orderTopic, order)
-                }
-                .doOnError{ print("Error in send order info: ${it.message}") }
+                .doOnError{ log.error("Error in send order info: ${it.message}", it) }
 
 }
