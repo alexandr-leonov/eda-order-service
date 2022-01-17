@@ -8,5 +8,4 @@ EXPOSE 9092
 WORKDIR /order-service
 COPY ./build/libs/. .
 
-# ENTRYPOINT ["java","-jar","order-service-1.0.0.jar"]
-ENTRYPOINT ls
+ENTRYPOINT ["java","-jar","order-service-1.0.0.jar"]
